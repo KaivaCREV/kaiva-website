@@ -13,11 +13,10 @@ export default function Home() {
           className="h-32 object-contain"
         />
         <h1 className="text-xl font-semibold mt-2">The Best A.I. Assistant for CRE Pros</h1>
-        <p className="text-sm text-gray-500">What CRE tasks have you done 1,000,000 times? Let KAIVA handle it.</p>
       </header>
 
       {/* Assistant Image */}
-      <div className="flex justify-center mb-6">
+      <div className="flex flex-col items-center mb-6">
         <Image
           src="/kai-asst.jpg"
           alt="AI Assistant"
@@ -25,6 +24,7 @@ export default function Home() {
           height={300}
           className="rounded-lg shadow-md w-full max-w-md"
         />
+        <span className="text-sm font-medium mt-4">Hey there! I&apos;m Kai, your CRE A.I. Assistant Extraordinaire...</span>
       </div>
 
       {/* Main Content */}
@@ -32,7 +32,6 @@ export default function Home() {
         {/* KAIVA Chat Assistant */}
         <section className="bg-white p-6 rounded-2xl shadow border border-gray-200">
           <div className="mb-4 flex justify-between items-center">
-            <span className="text-sm font-medium">I&apos;m Kai, your CRE A.I. Assistant Extraordinaire...</span>
             <button className="text-sm text-blue-500 hover:underline">New Chat</button>
           </div>
 
@@ -72,6 +71,11 @@ export default function Home() {
           </div>
         </section>
       </main>
+
+      {/* Footer tagline */}
+      <footer className="text-center py-8 text-sm text-gray-500 italic">
+        What CRE tasks have you done 1,000,000 times? Let KAIVA handle it.
+      </footer>
     </div>
   );
 }
