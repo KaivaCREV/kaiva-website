@@ -32,7 +32,7 @@ export default function Home() {
         {/* KAIVA Chat Assistant */}
         <section className="bg-white p-6 rounded-2xl shadow border border-gray-200">
           <div className="mb-4 flex justify-between items-center">
-            <span className="text-sm font-medium">I'm Kai, your CRE A.I. Assistant Extraordinaire...</span>
+            <span className="text-sm font-medium">I&apos;m Kai, your CRE A.I. Assistant Extraordinaire...</span>
             <button className="text-sm text-blue-500 hover:underline">New Chat</button>
           </div>
 
@@ -48,7 +48,7 @@ export default function Home() {
 
           {/* Role Buttons */}
           <div className="mb-4">
-            <h3 className="text-sm mb-2">What's your role in CRE:</h3>
+            <h3 className="text-sm mb-2">What&apos;s your role in CRE:</h3>
             <div className="flex flex-wrap gap-2">
               <button className="text-xs bg-[#0F3653] text-white px-3 py-1 rounded-full">Appraiser</button>
               <button className="text-xs bg-[#0F3653] text-white px-3 py-1 rounded-full">Broker</button>
