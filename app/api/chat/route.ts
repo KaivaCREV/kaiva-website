@@ -1,6 +1,11 @@
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
+type ChatMessage = {
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+};
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -9,15 +14,16 @@ export async function POST(request: Request) {
   try {
     const formData = await request.formData();
     const message = formData.get('message') as string;
-    const history = JSON.parse(formData.get('history') as string);
+    const history = JSON.parse(formData.get('history') as string) as ChatMessage[];
     const file = formData.get('file') as File | null;
 
     let fileContent = '';
     if (file) {
       try {
-        // For now, only handle text files
+        const bytes = await file.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+
         if (file.type === 'text/plain') {
-          const buffer = Buffer.from(await file.arrayBuffer());
           fileContent = buffer.toString('utf-8');
           
           // Basic cleanup and truncation
@@ -59,7 +65,7 @@ export async function POST(request: Request) {
           4. If it's a lease or contract, identify critical clauses
           5. For financial documents, emphasize key metrics and calculations`
         },
-        ...history.map((msg: any) => ({
+        ...history.map((msg: ChatMessage) => ({
           role: msg.role,
           content: msg.content
         })),
@@ -78,10 +84,10 @@ export async function POST(request: Request) {
       message: response.choices[0].message.content
     });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('API Error:', error);
     return NextResponse.json(
-      { error: 'Failed to process request: ' + (error.message || 'Unknown error') },
+      { error: 'Failed to process request: ' + (error instanceof Error ? error.message : 'Unknown error') },
       { status: 500 }
     );
   }

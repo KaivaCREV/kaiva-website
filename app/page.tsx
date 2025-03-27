@@ -7,6 +7,17 @@ type Message = {
   content: string;
 };
 
+// Update the recognition event type
+type SpeechRecognitionEvent = {
+  results: {
+    [key: number]: {
+      [key: number]: {
+        transcript: string;
+      };
+    };
+  };
+};
+
 export default function Home() {
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -61,11 +72,11 @@ export default function Home() {
       setMessage('');
       setAttachedFile(null);
 
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error:', error);
       const errorMessage: Message = {
         role: 'assistant',
-        content: `Error: ${error.message || 'Failed to process request. Please try again.'}`
+        content: `Error: ${error instanceof Error ? error.message : 'Failed to process request. Please try again.'}`
       };
       setChatHistory(prev => [...prev, errorMessage]);
     } finally {
@@ -111,7 +122,7 @@ export default function Home() {
       setIsListening(true);
     };
 
-    recognition.onresult = (event: any) => {
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
       const transcript = event.results[0][0].transcript;
       setMessage(prev => prev + ' ' + transcript);
     };
