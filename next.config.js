@@ -9,10 +9,10 @@ const nextConfig = {
       ...config.resolve.fallback,
       fs: false,
       path: false,
-      crypto: false,
+      crypto: false
     };
     return config;
-  },
-}
+  }
+};
 
-module.exports = nextConfig 
+module.exports = nextConfig;

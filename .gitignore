@@ -53,3 +53,23 @@ next-env.d.ts
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Next.js
+.next/
+node_modules/
+.env*.local
+
+# Project specific
+abstracts/
+*.pdf
+*.xlsx
+
+# OS specific
+.DS_Store
