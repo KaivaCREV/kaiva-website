@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 
 export default function App() {
   const [file, setFile] = useState<File | null>(null);
@@ -24,14 +23,17 @@ export default function App() {
     formData.append("file", file);
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+      const response = await fetch("http://127.0.0.1:8000/upload", {
+        method: "POST",
+        body: formData,
       });
 
-      if (response.data.download_url) {
-        setDownloadUrl(`http://127.0.0.1:8000${response.data.download_url}`);
-      } else if (response.data.error) {
-        setError(response.data.error);
+      const data = await response.json();
+
+      if (data.download_url) {
+        setDownloadUrl(`http://127.0.0.1:8000${data.download_url}`);
+      } else if (data.error) {
+        setError(data.error);
       }
     } catch (err) {
       setError("Something went wrong. Please try again.");
