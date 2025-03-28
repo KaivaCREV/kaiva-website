@@ -20,7 +20,7 @@ type SpeechRecognitionEvent = {
 
 declare global {
   interface Window {
-    webkitSpeechRecognition: any; // Ideally replace 'any' with proper type
+    webkitSpeechRecognition: typeof SpeechRecognition; // Ideally replace 'any' with proper type
   }
 }
 
